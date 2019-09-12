@@ -1,0 +1,6 @@
+{
+    "terminal.integrated.env.osx": {
+        "PATH": "/Users/elee/.platformio/penv/bin:/Users/elee/.platformio/penv:/Users/elee/anaconda3/condabin:/Users/elee/.rbenv/shims:/Users/elee/anaconda/bin:/Users/elee/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/usr/local/CrossPack-AVR/bin:/Users/elee/.go/bin:/usr/local/opt/go/libexec/bin",
+        "PLATFORMIO_CALLER": "vscode"
+    }
+}
