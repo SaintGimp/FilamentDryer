@@ -9,6 +9,8 @@
 #include <Wire.h>
 #include <Adafruit_Si7021.h>
 
+#include <Adafruit_NeoPixel.h>
+
 // TODO: borrow parts of this library and modify it to read
 // the temperature generated during the humidity reading, and
 // also play with the bit resolution of the readings
@@ -49,6 +51,8 @@ PID heaterPid(&pidInput, &pidOutput, &pidSetPoint, kp, ki, kd, P_ON_M, DIRECT);
 
 Adafruit_SSD1306 gfx(128, 32, &Wire);
 AdaColorGfxMenuConfig gfxConfig;
+
+Adafruit_NeoPixel neopixel(1, 8, NEO_GRB + NEO_KHZ800);
 
 void setup() {
   digitalWrite(triacPin, LOW);
@@ -94,6 +98,9 @@ void setup() {
   
   taskManager.scheduleFixedRate(1000, UpdateDisplayValues);
   taskManager.scheduleFixedRate(1000, DoSerialOutput);
+
+  neopixel.begin();
+  neopixel.show();
 }
 
 void loop() {
@@ -105,6 +112,8 @@ void loop() {
   ReceiveSerialInput();
   ProcessSerialInput();
   
+  SetPixel();
+
   Watchdog.reset();
 }
 
@@ -238,6 +247,18 @@ void ProcessSerialInput() {
   Serial.println(pidSetPoint, 4);
 
   newSerialData = false;
+}
+
+void SetPixel()
+{
+  if (pidSetPoint == 0) {
+    neopixel.setPixelColor(0, neopixel.Color(0, 0, 0));
+  }
+  else {
+    neopixel.setPixelColor(0, neopixel.Color(255, 0, 0));
+  }
+
+  neopixel.show();                          
 }
 
 void ZeroCross() {
